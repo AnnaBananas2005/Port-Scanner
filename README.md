@@ -1,6 +1,6 @@
 # Port-Scanner
 
-## Configurations in Visual Studios (Setting it up)
+## Configurations in Microsoft Visual Studios (Setting it up)
 
 
 ## Basic Overview
