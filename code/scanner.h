@@ -10,17 +10,15 @@ class Scanner {
 	public:
 		const char* ip;
 		SOCKET sockConnect, ListenSocket, AcceptSocket;
+		WSADATA wsaData;
+		sockaddr_in service;
 
-		void socketCreation(const char* ip, int port);
-		void bindSocket(const char* ip, int port);
-		void listenForConnections(const char* ip, int port);
-		void connectToServer(const char* ip, int port);
-		void acceptConnections(const char* ip, int port);
-		void processData(const char* ip, int port);
-
-	private:
-		//deciding what to put
+		void socketCreation(const char* ip, int port, bool& returnValue);
+		void bindSocket(const char* ip, int port, bool& returnValue);
+		void listenForConnections(const char* ip, int port, int& result, bool& returnValue);
+		void connectToServer(const char* ip, int port, bool& returnValue);
+		void acceptConnections(const char* ip, int port, bool& returnValue);
+		void processData(const char* ip, int port, bool& returnValue);
 };
-
 
 #endif
