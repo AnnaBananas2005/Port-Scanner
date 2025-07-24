@@ -1,4 +1,8 @@
 # Port-Scanner
+
+##Configurations in Visual Studios (Setting it up)
+
+
 ## Basic Overview
 (will explain soon)
 
