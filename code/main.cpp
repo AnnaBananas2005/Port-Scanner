@@ -13,7 +13,7 @@ int main() {
 	void acceptConnections(const char* ip, int port);
 	void processData(const char* ip, int port);
 
-	std::cout << "Port" << setw(5) << "State";
+	std::cout << "Port" << std::setw(5) << "State";
 	std::cout << port;  //will add returned state
 
 	return 0;
