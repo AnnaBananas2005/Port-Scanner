@@ -5,69 +5,75 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+#define DEFAULT_BUFLEN 512
+
 //Used: https://learn.microsoft.com/en-us/windows/win32/api/winsock2/
 
 const char* ip = "127.0.0.1";
 
-void Scanner::socketCreation(const char* ip, int port) {
-	//initializes winsock
+void Scanner::socketCreation(const char* ip, int port, bool& returnValue) {
 	int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (result != 0) { 
 		std::cout << "Cant find usable Winsock.dll (Dynamic Link Library)";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
-	//socket - Creating  actual socket (TCP/UDP), using IPv4
-	sockConnect = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); //(Could also replace IPPROTO_TCP with 6)
-
+	sockConnect = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); 
 }
 
 //Associates socket with local ip address & port
-void Scanner::bindSocket(const char* ip, int port){
-	int returnValue = 0;
+void Scanner::bindSocket(const char* ip, int port, bool& returnValue){
+	int storeResult = 0;
 
-	ListenSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	//Can't you just replace this part with sock? From socketCreation
-	sockaddr_in service; //the socket address that gets used to bind
+	ListenSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);	
+	sockaddr_in service; 
 	service.sin_family = AF_INET;
-	inet_pton(AF_INET, ip, &serverAddress.sin_addr);
-	service.sin_port = htons(/*port we returned from*/); //mb we write an if, if its a port-range?
 
-	returnValue = bind(ListenSocket, (SOCKADDR*)&service, sizeof(service);
-	if (returnValue == SOCKET_ERROR) {
+	inet_pton(AF_INET, ip, &service.sin_addr);	
+	service.sin_port = htons(port);
+
+	storeResult = bind(ListenSocket, (SOCKADDR*)&service, sizeof(service));
+	if (storeResult == SOCKET_ERROR) {
 		std::cout << "The bind has failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
 }
 
 //Ready to accept connections
-void Scanner::listenForConnections(const char* ip, int port) {
-	int listenSocketResult = 0;
+void Scanner::listenForConnections(const char* ip, int port, int &result, bool& returnValue) {
 
 	if (listen(ListenSocket, SOMAXCONN) == SOCKET_ERROR) {
 		std::cout << "Listen socket failed with an error";
 		WSACleanup();
-		return 1;
+		returnValue = false; 
 	}
 	std::cout << "Listening on socket..";
-	listenSocketResult = closesocket(ListenSocket);
+	result = closesocket(ListenSocket);
 
-	if (listenSocketResult == SOCKET_ERROR) {
+	if (result == SOCKET_ERROR) {
 		std::cout << "The listen socket result failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
+	}
+	else {
+		std::cout << "Connection successful" << std::endl;
+		returnValue = true;	
 	}
 
 }
 
-//connect (client) - Initiates connection to remote server
+//Initiates connection to remote server
+void Scanner::connectToServer(const char* ip, int port, bool& returnValue) {
+	service.sin_family = AF_INET;
+	inet_pton(AF_INET, ip, &service.sin_addr);
+	service.sin_port = htons(port);
 
-void Scanner::connectToServer(const char* ip, int port) {
-	int connectResult = connect(sockConnect/*from socketCreation*/, (SOCKADDR*)&service /*from bindSocket*/, sizeof(service));
+	int connectResult = connect(sockConnect, (SOCKADDR*)&service, sizeof(service));
 	if (connectResult == SOCKET_ERROR) {
 		std::cout << "The connecting result failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
 
 	std::cout << "Connecting to server..";
@@ -76,32 +82,35 @@ void Scanner::connectToServer(const char* ip, int port) {
 	if (connectResult == SOCKET_ERROR) {
 		std::cout << "The connect result failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
 }
 
-//accept (server) - Accepts connections from client
-
-void Scanner::acceptConnections(const char* ip, int port) {
+// Accepts connections from client
+void Scanner::acceptConnections(const char* ip, int port, bool& returnValue) {
 	AcceptSocket = accept(ListenSocket, NULL, NULL);
 	if (AcceptSocket == SOCKET_ERROR) {
 		std::cout << "The accept socket failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
 	closesocket(ListenSocket);
 }
 
-//send & recv - Data exchange via connected socket (could possibly be seperated)
-void Scanner::processData(const char* ip, int port) {
+//Data exchange via connected socket 
+void Scanner::processData(const char* ip, int port, bool& returnValue) {
 	int dataSending = 0;
-	char* sendbuf = "The client is sending data test";
+	int recvbuflen = DEFAULT_BUFLEN;
+
+	const char* sendbuf = "The client is sending data test";
+	char recvbuf[512]; //512 is the DEFAULT_BUFLEN
+
 	//This part is a handshake (confirming communication)
 	int sendFirstBuffer = send(sockConnect, sendbuf, (int)strlen(sendbuf), 0);
 	if (sendFirstBuffer == SOCKET_ERROR) {
 		std::cout << "The send failed with an error.";
 		WSACleanup();
-		return 1;
+		returnValue = false;
 	}
 	do {
 		dataSending = recv(sockConnect, recvbuf, recvbuflen, 0);
@@ -119,8 +128,4 @@ void Scanner::processData(const char* ip, int port) {
 	closesocket(sockConnect);
 	WSACleanup();
 }
-
-
-
-
 
