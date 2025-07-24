@@ -5,8 +5,6 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-#define DEFAULT_BUFLEN 512
-
 //Used: https://learn.microsoft.com/en-us/windows/win32/api/winsock2/
 
 void Scanner::socketCreation(const char* ip, int port, bool& returnValue) {
@@ -45,41 +43,4 @@ void Scanner::connectToServer(const char* ip, int port, bool& returnValue) {
 	std::cout << "Connected to server..";
 	returnValue = true;
 	
-}
-
-
-//Data exchange via connected socket 
-void Scanner::processData(const char* ip, int port, bool& returnValue) {
-	int dataSending = 0;
-	int recvbuflen = DEFAULT_BUFLEN;
-	const char* sendbuf = "The client is sending data test";
-	char recvbuf[512]; //512 is the DEFAULT_BUFLEN
-
-
-	//This part is a handshake (confirming communication)
-	int sendFirstBuffer = send(sockConnect, sendbuf, (int)strlen(sendbuf), 0);
-	if (sendFirstBuffer == SOCKET_ERROR) {
-		std::cout << "The send failed with an error." << std::endl;
-		WSACleanup();
-		returnValue = false;
-		return;
-	}
-	do {
-		dataSending = recv(sockConnect, recvbuf, recvbuflen, 0);
-		if (dataSending > 0) {
-			std::cout << "Data (bytes) are received";
-		}
-		else if (dataSending == 0) {
-			std::cout << "Connection closed";
-			break;
-		}
-		else {
-			std::cout << "Failed with error";
-			break;
-		}
-	} while (dataSending > 0);
-
-	closesocket(sockConnect);
-	WSACleanup();
-	returnValue = true;
 }
