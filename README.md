@@ -47,6 +47,3 @@ Switch over to 'Release' and do the same thing ^
 <br><br>
 <img width="936" height="191" alt="image" src="https://github.com/user-attachments/assets/49080520-8152-47b8-b88b-c178a726a281" />
 
-## In-Depth Analysis
-(will explain the program with detail relating to port scanning)
-
