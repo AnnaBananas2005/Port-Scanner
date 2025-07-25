@@ -2,16 +2,19 @@
 
 ## Setting up your Properties
 1) Project->Project Name Properties
-	C/C++ -> General -> Additional Include Directories
-	C:\SFML\SFML-2.6.1\include          (SFML-2.6.1 could be changed, if you got a different version when downloading)
+	C/C++ -> General -> Additional Include Directories <br><br>
+	C:\SFML\SFML-2.6.1\include
+	<br><br>(SFML-2.6.1 could be changed, if you got a different version when downloading)
+----
 
 2) Linker -> General -> Additional Library Directories
-	C:\SFML\SFML-2.6.1\lib
+	<br><br>C:\SFML\SFML-2.6.1\lib
+----
 
 3) Linker -> Input -> Additional Dependencies
-	Paste this before the existing text:
-	sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-	d.lib;sfml-network-d.lib;sfml-audio-d.lib;
-
+	<br><br>Paste this before the existing text:
+	<br><br>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;
+----
 
 
 ## Configurations in Microsoft Visual Studios (When using WinSock2)
