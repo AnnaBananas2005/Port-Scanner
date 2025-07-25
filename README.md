@@ -20,8 +20,8 @@
 ## Configurations in Microsoft Visual Studios (When using WinSock2)
 <img width="948" height="185" alt="image" src="https://github.com/user-attachments/assets/498427f8-0a58-4509-9b17-630218c23b44" />
 <br><br>
-In Property pages, switch over to 'Debug'
-<br><br>Go to the project Property pages and go to Linker -> Input -> Additional Dependencies and add in
+In Solution Property pages, switch over to 'Debug'
+<br><br>Go to the Property pages and go to Linker -> Input -> Additional Dependencies and add in
 'Ws2_32.lib;' in front. 
 <br><br>This is because you need to link the Winsock2 library so you can use the functions
 <br><br>
