@@ -1,7 +1,15 @@
 # Port-Scanner
 
 ## Basic Overview
-(will explain soon)
+Before describing port scanners- we first have to describe what even are ports.
+<br><br>You can think of ports almost like pipes, they need to get to a destination, but each of these pipes gets to a different destination. The port in question would be the individual pipes. 
+<br><br>There are 0-65535 ports, so that means different protocols for each one. 
+<br>The one most commonly used on a device is port 80, which is used for HTTP browsing or port 443 which is HTTPS. Your computer first sends a request to the web server, and then the server uses that same port, port 80 (or port 443 if you are on a HTTPS website) to send back the webpage data.
+
+Port scanners check which of these ports are open or closed. When you send a request to the port, and it doesn't listen to the connection, that means it's closed. Now there are 3 types of port-ranges. 
+The first would be Well-known ports, which are 0-1023 which includes HTTP (80), HTTPS (443), File Transfer Protocol (FTP) (21), etc. 
+<br><br>The 2nd type is Registered ports 1024-49151 are used by many different applications and typically registered with IANA (Internet Assigned Numbers Authority, which usually involves documentation and all the… fun stuff).
+<br><br>The 3rd is the Dynamic/Private ports 49152-65535, dynamic being that an application is not assigned to a specific service, just chosen randomly for a connection.
 
 ## Setting up your Properties
 1) Project->Project Name Properties
@@ -38,9 +46,6 @@ In Solution Property pages, switch over to 'Debug'
 Switch over to 'Release' and do the same thing ^
 <br><br>
 <img width="936" height="191" alt="image" src="https://github.com/user-attachments/assets/49080520-8152-47b8-b88b-c178a726a281" />
-
-## What is a port scanner?
-(will explain soon)
 
 ## In-Depth Analysis
 (will explain the program with detail relating to port scanning)
