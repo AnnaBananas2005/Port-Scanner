@@ -1,5 +1,8 @@
 # Port-Scanner
 
+## Basic Overview
+(will explain soon)
+
 ## Setting up your Properties
 1) Project->Project Name Properties
 	C/C++ -> General -> Additional Include Directories <br><br>
@@ -14,6 +17,10 @@
 3) Linker -> Input -> Additional Dependencies
 	<br><br>Paste this before the existing text:
 	<br><br>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;
+----
+
+PUT .dll files from your local disk -> C:\SFML\bin to -> (filename) -> x64 -> Debug folder.
+
 ----
 
 
@@ -31,10 +38,6 @@ In Solution Property pages, switch over to 'Debug'
 Switch over to 'Release' and do the same thing ^
 <br><br>
 <img width="936" height="191" alt="image" src="https://github.com/user-attachments/assets/49080520-8152-47b8-b88b-c178a726a281" />
-
-
-## Basic Overview
-(will explain soon)
 
 ## What is a port scanner?
 (will explain soon)
