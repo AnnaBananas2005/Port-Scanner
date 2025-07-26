@@ -2,7 +2,6 @@
 
 ## Basic Overview
 Before describing port scanners- we first have to describe what even are ports.
-<br><br>You can think of ports almost like pipes, they need to get to a destination, but each of these pipes gets to a different destination. The port in question would be the individual pipes. 
 <br><br>There are 0-65535 ports, so that means different protocols for each one. 
 <br>The one most commonly used on a device is port 80, which is used for HTTP browsing or port 443 which is HTTPS. Your computer first sends a request to the web server, and then the server uses that same port, port 80 (or port 443 if you are on a HTTPS website) to send back the webpage data.
 
