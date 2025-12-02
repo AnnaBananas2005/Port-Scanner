@@ -1,14 +1,30 @@
 # Port-Scanner
 
 ## Basic Overview
-Before describing port scanners- we first have to describe what even are ports.
-<br><br>There are 0-65535 ports, so that means different protocols for each one. 
-<br>The one most commonly used on a device is port 80, which is used for HTTP browsing or port 443 which is HTTPS. Your computer first sends a request to the web server, and then the server uses that same port, port 80 (or port 443 if you are on a HTTPS website) to send back the webpage data.
+This project is a basic port-scanner written in C++ using the Winsock2 API on Windows. It allows the user to enter a port number, or a port-range.
 
-Port scanners check which of these ports are open or closed. When you send a request to the port, and it doesn't listen to the connection, that means it's closed. Now there are 3 types of port-ranges. 
-The first would be Well-known ports, which are 0-1023 which includes HTTP (80), HTTPS (443), File Transfer Protocol (FTP) (21), etc. 
-<br><br>The 2nd type is Registered ports 1024-49151 are used by many different applications and typically registered with IANA (Internet Assigned Numbers Authority, which usually involves documentation and all the… fun stuff).
-<br><br>The 3rd is the Dynamic/Private ports 49152-65535, dynamic being that an application is not assigned to a specific service, just chosen randomly for a connection.
+ This tool was solely used for educational purposes only with both the port-scanner and the Winsock2 API.
+
+## Features
+For a single-Port Scan, enter a specific port number, and the scanner will attempt a connection, and it reports back whether the port is 
+<br>OPEN -> TCP Connection succeeds, yay!
+<br>CLOSED -> Connection fails
+
+For range-scan, enter a starting and ending port, the scanner will loop through the range and displays the status of each port.
+
+<br>ADDITIONAL FEATURES: <br>
+<br>This project uses Winsock2 for socket operations
+<br>Has a class-based design Scanner keeps it clean
+<br>Neat and helpful console output
+<br>Cleanup of Winsock resources
+
+# How it works
+1. We initialize Winsock with WSAStartup
+2. Creates a TCP socket (which is AF_INET, SOCK_STREAM)
+3. For each port (single or range):
+   	<br>-Attempts to connection
+    <br>-If Succeeds (port is open), if fails (port is closed)
+4. Cleans up Winsock resources when finished
 
 ## Setting up your Properties
 1) Project->Project Name Properties
