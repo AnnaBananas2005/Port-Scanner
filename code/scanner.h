@@ -7,14 +7,15 @@
 #include <ws2tcpip.h>
 
 class Scanner {
-	public:
-		const char* ip;
-		SOCKET sockConnect;
-		WSADATA wsaData;
-		sockaddr_in service;
+public:
+	const char* ip;
+	SOCKET sockConnect;
+	WSADATA wsaData;
+	sockaddr_in service;
 
-		void socketCreation(const char* ip, int port, bool& returnValue);
-		void connectToServer(const char* ip, int port, bool& returnValue);
+	void socketCreation(const char* ip, int port, bool& returnValue);
+	void connectToServer(const char* ip, int port, bool& returnValue);
+	void rangeScan(Scanner& scanner, const char* ip, int startRange, int endRange);
 };
 
 #endif
