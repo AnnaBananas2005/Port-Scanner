@@ -9,13 +9,13 @@
 
 void Scanner::socketCreation(const char* ip, int port, bool& returnValue) {
 	int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
-	if (result != 0) { 
+	if (result != 0) {
 		std::cout << "Cant find usable Winsock.dll (Dynamic Link Library)";
 		WSACleanup();
-		returnValue = false; 
+		returnValue = false;
 	}
 	//socket - Creating  actual socket (TCP/UDP), using IPv4
-	sockConnect = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); 
+	sockConnect = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (sockConnect == INVALID_SOCKET) {
 		std::cout << "Socket creation failed with error" << std::endl;
 		WSACleanup();
@@ -37,10 +37,22 @@ void Scanner::connectToServer(const char* ip, int port, bool& returnValue) {
 		std::cout << "The connecting result failed with an error." << std::endl;
 		WSACleanup();
 		returnValue = false;
-		return; //signals to exit
+		return; 
 	}
 
-	std::cout << "Connected to server..";
+	std::cout << "Connected to server.." << std::endl;
 	returnValue = true;
-	
+
+}
+void Scanner::rangeScan(Scanner& scanner, const char* ip, int startRange, int endRange) {
+	bool returnValue = false;
+	for (int port = startRange; port <= endRange; port++) {
+		scanner.socketCreation(ip, port, returnValue);
+		if (returnValue) {
+			scanner.connectToServer(ip, port, returnValue);
+		}
+
+		std::cout << "Port" << "\t" << "State" << std::endl;
+		std::cout << port << "\t" << (returnValue ? "OPEN" : "CLOSED") << std::endl;
+	}
 }
