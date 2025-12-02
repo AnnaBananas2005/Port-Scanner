@@ -27,20 +27,6 @@ For range-scan, enter a starting and ending port, the scanner will loop through 
 4. Cleans up Winsock resources when finished
 
 ## Setting up your Properties
-1) Project->Project Name Properties
-	C/C++ -> General -> Additional Include Directories <br><br>
-	C:\SFML\SFML-2.6.1\include
-	<br><br>(SFML-2.6.1 could be changed, if you got a different version when downloading)
-----
-
-2) Linker -> General -> Additional Library Directories
-	<br><br>C:\SFML\SFML-2.6.1\lib
-----
-
-3) Linker -> Input -> Additional Dependencies
-	<br><br>Paste this before the existing text:
-	<br><br>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;
-----
 
 PUT .dll files from your local disk -> C:\SFML\bin to -> (filename) -> x64 -> Debug folder.
 
