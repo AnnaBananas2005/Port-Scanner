@@ -28,11 +28,6 @@ For range-scan, enter a starting and ending port, the scanner will loop through 
 
 ## Setting up your Properties
 
-PUT .dll files from your local disk -> C:\SFML\bin to -> (filename) -> x64 -> Debug folder.
-
-
-
-
 ## Configurations in Microsoft Visual Studios (When using WinSock2)
 <img width="948" height="185" alt="image" src="https://github.com/user-attachments/assets/498427f8-0a58-4509-9b17-630218c23b44" />
 <br><br>
